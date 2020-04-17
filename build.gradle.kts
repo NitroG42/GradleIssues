@@ -3,10 +3,8 @@ plugins {
     `java-gradle-plugin`
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
-
-
+//group = "com.nitro"
+//version = "1.0-SNAPSHOT"
 
 gradlePlugin {
     plugins {
@@ -16,8 +14,6 @@ gradlePlugin {
         }
     }
 }
-
-
 
 repositories {
     mavenCentral()

@@ -1,7 +1,6 @@
-import groovy.util.GroovyTestCase.assertEquals
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
-import org.junit.Assert.assertTrue
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,7 +20,7 @@ class TestIssue {
     @Before
     @Throws(IOException::class)
     fun setup() {
-        settingsFile = testProjectDir.newFile("settings.gradle.kts")
+        settingsFile = testProjectDir.newFile("settings.gradle.kits")
         buildFile = testProjectDir.newFile("build.gradle.kts")
     }
 
@@ -36,21 +35,16 @@ class TestIssue {
             """
         plugins {
             `com.nitro.issue`
-        }
-            tasks.register<TaskWithLongMappingTreatement>("helloWorld") {
-                doLast {
-                    println("Hello world!")
-                }
-            }                
-            """.trimMargin()
+        }              
+            """.trimIndent()
         )
         val result = GradleRunner.create()
             .withProjectDir(testProjectDir.root)
-            .withArguments("helloWorld", "--info")
+            .withArguments("build", "--info")
             .withPluginClasspath()
             .build()
 
-        assertTrue(result.output.contains("Hello world!"))
-        assertEquals(TaskOutcome.SUCCESS, result.task(":helloWorld")?.outcome);
+//        assertTrue(result.output.contains("Hello world!"))
+        assertEquals(TaskOutcome.SUCCESS, result.task(":build")?.outcome);
     }
 }
